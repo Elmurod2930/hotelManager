@@ -1,10 +1,16 @@
 package org.example.controller;
 
+import org.example.service.ConvenientService;
 import org.example.util.ScannerUtil;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class ConvenientController {
+    @Autowired
+    private ConvenientService convenientService;
+
     public void menu() {
         boolean b = true;
         while (b) {
@@ -29,11 +35,18 @@ public class ConvenientController {
     }
 
     public void add() {
+        System.out.print("Enter name: ");
+        String name = ScannerUtil.scannerText.next();
+        convenientService.add(name);
     }
 
     public void list() {
+        convenientService.getList();
     }
 
     public void delete() {
+        System.out.print("Enter id: ");
+        Integer id=ScannerUtil.scannerInt.nextInt();
+        convenientService.delete(id);
     }
 }

@@ -1,10 +1,14 @@
 package org.example.controller;
 
+import org.example.service.TypeService;
 import org.example.util.ScannerUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class EmployeeTypeController {
+    @Autowired
+    private TypeService typeService;
     public void menu() {
         boolean b = true;
         while (b) {
@@ -27,7 +31,17 @@ public class EmployeeTypeController {
             }
         }
     }
-    public void add(){}
-    public void list(){}
-    public void delete(){}
+    public void add(){
+        System.out.print("Enter name: ");
+        String name=ScannerUtil.scannerText.next();
+        typeService.add(name);
+    }
+    public void list(){
+        typeService.getList();
+    }
+    public void delete(){
+        System.out.print("Enter id: ");
+        Integer id=ScannerUtil.scannerInt.nextInt();
+        typeService.delete(id);
+    }
 }
