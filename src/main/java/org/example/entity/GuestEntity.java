@@ -26,4 +26,14 @@ public class GuestEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "passport_id")
     private PassportEntity passport;
+    @Column(name = "visible")
+    private boolean visible;
+
+    public GuestEntity(String name, String surname, String phone, PassportEntity passport) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.passport = passport;
+        this.visible = true;
+    }
 }

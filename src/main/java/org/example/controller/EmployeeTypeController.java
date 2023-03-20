@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 public class EmployeeTypeController {
     @Autowired
     private TypeService typeService;
+
     public void menu() {
         boolean b = true;
         while (b) {
@@ -31,17 +32,20 @@ public class EmployeeTypeController {
             }
         }
     }
-    public void add(){
+
+    public void add() {
         System.out.print("Enter name: ");
-        String name=ScannerUtil.scannerText.next();
+        String name = ScannerUtil.scannerText.next();
         typeService.add(name);
     }
-    public void list(){
+
+    public void list() {
         typeService.getList();
     }
-    public void delete(){
+
+    public void delete() {
         System.out.print("Enter id: ");
-        Integer id=ScannerUtil.scannerInt.nextInt();
+        Integer id = ScannerUtil.scannerInt.nextInt();
         typeService.delete(id);
     }
 }

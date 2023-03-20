@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -24,10 +24,17 @@ public class BookingEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private RoomEntity room;
-    @Column(name = "date")
-    private Date date;
-    @Column(name = "how_many_days")
-    private Integer howManyDays;
+    @Column(name = "booking_date")
+    private Date bookingDate;
+    @Column(name = "booking_day")
+    private Integer bookingDay;
     @Column(name = "price")
     private Double price;
+
+    public BookingEntity(GuestEntity guest, RoomEntity room, Date bookingDate, Integer bookingDay) {
+        this.guest = guest;
+        this.room = room;
+        this.bookingDate = bookingDate;
+        this.bookingDay = bookingDay;
+    }
 }

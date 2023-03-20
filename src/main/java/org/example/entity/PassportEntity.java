@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -20,12 +20,20 @@ public class PassportEntity {
     private Integer id;
     @Column(name = "number", unique = true, nullable = false)
     private String number;
-    @Column(name = "location")
-    private String location;
     @Column(name = "given_date")
     private Date givenDate;
-    @Column(name = "effective_date")
-    private Date effectiveDate;
-    @Column(name = "given_by_whon")
-    private String givenByWhon;
+    @Column(name = "expired_date")
+    private Date expiredDate;
+    @Column(name = "given_by")
+    private String givenBy;
+    @Column(name = "visible")
+    private boolean visible;
+
+    public PassportEntity(String number, Date givenDate, Date expiredDate, String givenBy) {
+        this.number = number;
+        this.givenDate = givenDate;
+        this.expiredDate = expiredDate;
+        this.givenBy = givenBy;
+        this.visible = true;
+    }
 }

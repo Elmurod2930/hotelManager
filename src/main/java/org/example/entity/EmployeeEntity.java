@@ -33,6 +33,12 @@ public class EmployeeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     private TypeEntity type;
-    @Column(name = "visible")
-    private boolean visible = true;
+
+    public EmployeeEntity(String name, String surname, String phone, Date birthday) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.status = EmployeeStatus.ACTIVE;
+    }
 }
