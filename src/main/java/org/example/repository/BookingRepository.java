@@ -18,30 +18,50 @@ public class BookingRepository {
 
     public void makeBooking(BookingEntity entity) {
         Session session = sessionFactory.openSession();
-        session.save(entity);
-        session.close();
+        try {
+            session.save(entity);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public List<BookingEntity> getList() {
         Session session = sessionFactory.openSession();
-        Query<BookingEntity> query = session.createQuery("from BookingEntity ", BookingEntity.class);
-        session.close();
-        return query.getResultList();
+        try {
+            Query<BookingEntity> query = session.createQuery("from BookingEntity ", BookingEntity.class);
+            return query.getResultList();
+        } catch (IllegalStateException e) {
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
     public List<BookingEntity> getListByRoom(RoomEntity room) {
         Session session = sessionFactory.openSession();
-        Query<BookingEntity> query = session.createQuery("from BookingEntity where room=:room", BookingEntity.class);
-        query.setParameter("room", room);
-        session.close();
-        return query.getResultList();
+        try {
+            Query<BookingEntity> query = session.createQuery("from BookingEntity where room=:room", BookingEntity.class);
+            query.setParameter("room", room);
+            return query.getResultList();
+        } catch (IllegalStateException e) {
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
     public List<BookingEntity> getListByGuest(GuestEntity guest) {
         Session session = sessionFactory.openSession();
-        Query<BookingEntity> query = session.createQuery("from BookingEntity where guest=:guest", BookingEntity.class);
-        query.setParameter("guest", guest);
-        session.close();
-        return query.getResultList();
+        try {
+            Query<BookingEntity> query = session.createQuery("from BookingEntity where guest=:guest", BookingEntity.class);
+            query.setParameter("guest", guest);
+            return query.getResultList();
+        } catch (IllegalStateException e) {
+            return null;
+        } finally {
+            session.close();
+        }
     }
 }

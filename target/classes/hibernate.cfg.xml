@@ -11,7 +11,15 @@
         <property name="show_sql">true</property>
 
         <!-- MAPPINGS -->
-        <mapping class="org.example.entity.Room"/>
+        <mapping class="org.example.entity.RoomEntity"/>
+        <mapping class="org.example.entity.SmenaEntity"/>
+        <mapping class="org.example.entity.EmployeeEntity"/>
+        <mapping class="org.example.entity.TypeEntity"/>
+        <mapping class="org.example.entity.GuestEntity"/>
+        <mapping class="org.example.entity.PassportEntity"/>
+        <mapping class="org.example.entity.ConvenientEntity"/>
+        <mapping class="org.example.entity.BookingEntity"/>
+        <mapping class="org.example.entity.ClearedRoomEntity"/>
     </session-factory>
 
 </hibernate-configuration>

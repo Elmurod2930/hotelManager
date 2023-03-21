@@ -3,11 +3,11 @@ package org.example.repository;
 import org.example.entity.RoomEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
@@ -17,32 +17,48 @@ public class RoomRepository {
 
     public void add(RoomEntity entity) {
         Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(entity);
-        transaction.commit();
-        session.close();
+        try {
+            session.save(entity);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public List<RoomEntity> list() {
         Session session = sessionFactory.openSession();
-        Query<RoomEntity> query = session.createQuery("from RoomEntity where visible=true ", RoomEntity.class);
-        List<RoomEntity> list = query.getResultList();
-        session.close();
-        return list;
+        try {
+            Query<RoomEntity> query = session.createQuery("from RoomEntity where visible=true ", RoomEntity.class);
+            return query.getResultList();
+        } catch (IllegalStateException e) {
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
     public RoomEntity getById(Integer id) {
         Session session = sessionFactory.openSession();
-        Query<RoomEntity> queue = session.createQuery("from RoomEntity where id=:id and visible=true ", RoomEntity.class);
-        queue.setParameter("id", id);
-        RoomEntity entity = queue.getSingleResult();
-        session.close();
-        return entity;
+        try {
+            Query<RoomEntity> queue = session.createQuery("from RoomEntity where id=:id and visible=true ", RoomEntity.class);
+            queue.setParameter("id", id);
+            return queue.getSingleResult();
+        } catch (IllegalStateException | NoResultException e) {
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
     public void delete(RoomEntity entity) {
         Session session = sessionFactory.openSession();
-        session.update(entity);
-        session.close();
+        try {
+            session.update(entity);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }

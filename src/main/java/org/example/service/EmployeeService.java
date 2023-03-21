@@ -41,4 +41,18 @@ public class EmployeeService {
         entity.setStatus(EmployeeStatus.NO_ACTIVE);
         employeeRepository.delete(entity);
     }
+
+    public boolean login(String phone) {
+        try {
+            EmployeeEntity entity = employeeRepository.getByPhone(phone);
+            if (entity == null) {
+                System.out.println("Error");
+                return false;
+            }
+        } catch (IllegalStateException e) {
+            System.out.println("Error");
+            return false;
+        }
+        return true;
+    }
 }
