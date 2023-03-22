@@ -14,11 +14,13 @@ public class ConvenientService {
 
     public void add(String name) {
         ConvenientEntity entity = convenientRepository.getByName(name);
-        if (entity == null) {
+        if (entity != null) {
             System.out.println("there is such convenience");
             return;
         }
-        convenientRepository.add(entity);
+        ConvenientEntity convenient = new ConvenientEntity();
+        convenient.setDescription(name);
+        convenientRepository.add(convenient);
     }
 
     public void getList() {

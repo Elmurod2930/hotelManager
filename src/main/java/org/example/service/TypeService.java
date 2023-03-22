@@ -16,11 +16,13 @@ public class TypeService {
     private TypeRepository typeRepository;
 
     public void add(String name) {
-        TypeEntity entity = typeRepository.getByName(name);
-        if (entity == null) {
+        TypeEntity entityObj = typeRepository.getByName(name);
+        if (entityObj != null) {
             System.out.println("not fount employee type");
             return;
         }
+        TypeEntity entity = new TypeEntity();
+        entity.setName(name);
         typeRepository.add(entity);
     }
 
