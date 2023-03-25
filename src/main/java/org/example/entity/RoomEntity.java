@@ -1,7 +1,7 @@
 package org.example.entity;
 
 import lombok.*;
-import org.example.enums.RoomType;
+import org.example.entity.enums.RoomType;
 
 import javax.persistence.*;
 

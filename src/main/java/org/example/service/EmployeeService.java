@@ -2,7 +2,7 @@ package org.example.service;
 
 import org.example.entity.EmployeeEntity;
 import org.example.entity.TypeEntity;
-import org.example.enums.EmployeeStatus;
+import org.example.entity.enums.EmployeeStatus;
 import org.example.repository.EmployeeRepository;
 import org.example.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,16 +43,12 @@ public class EmployeeService {
     }
 
     public boolean login(String phone) {
-        try {
-            EmployeeEntity entity = employeeRepository.getByPhone(phone);
-            if (entity == null) {
-                System.out.println("Error");
-                return false;
-            }
-        } catch (IllegalStateException e) {
+        EmployeeEntity entity = employeeRepository.getByPhone(phone);
+        if (entity == null) {
             System.out.println("Error");
             return false;
         }
-        return true;
+        TypeEntity type = typeRepository.getById(entity.getId());
+        return type.getName().equals("admin");
     }
 }

@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.entity.RoomEntity;
-import org.example.enums.RoomType;
+import org.example.entity.enums.RoomType;
 import org.example.service.RoomService;
 import org.example.util.ScannerUtil;
 import org.springframework.beans.factory.annotation.Autowired;

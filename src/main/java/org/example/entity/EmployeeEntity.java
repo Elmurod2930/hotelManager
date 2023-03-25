@@ -1,7 +1,7 @@
 package org.example.entity;
 
 import lombok.*;
-import org.example.enums.EmployeeStatus;
+import org.example.entity.enums.EmployeeStatus;
 
 import javax.persistence.*;
 import java.util.Date;
